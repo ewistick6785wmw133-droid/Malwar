@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malware Client</title>
-    <!-- Шрифт Montserrat -->
+    <!-- Топовый шрифт Montserrat -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -95,11 +95,18 @@
             margin: 0 auto;
             padding: 0 40px;
             display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            align-items: flex-start; 
+            flex-direction: row; 
+            justify-content: space-between; 
+            align-items: center; 
             flex-grow: 1;
             z-index: 10;
+            gap: 40px;
+        }
+        .content-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 550px;
         }
         .main-logo {
             font-size: 72px;
@@ -110,7 +117,6 @@
             text-transform: uppercase;
             line-height: 1;
             text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
-            transition: all 0.2s ease;
         }
         .main-quote {
             margin-top: 24px;
@@ -118,10 +124,8 @@
             font-weight: 500;
             color: #64748b; 
             opacity: 0.85;
-            max-width: 550px;
             line-height: 1.7;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            transition: all 0.2s ease;
         }
         .btn-container {
             margin-top: 40px;
@@ -167,6 +171,50 @@
             background: #22c55e !important;
             box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
         }
+        .cards-container {
+            display: flex;
+            gap: 24px;
+            transition: opacity 0.3s ease;
+        }
+        .game-card {
+            width: 240px;
+            height: 320px;
+            background-color: rgba(30, 41, 59, 0.3);
+            border: 2px solid rgba(59, 130, 246, 0.3); 
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: #2563eb;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+        }
+        .game-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .game-card:hover img {
+            opacity: 1;
+        }
+        .version-tag {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
         footer {
             width: 100%;
             max-width: 1200px;
@@ -184,10 +232,8 @@
     </style>
 </head>
 <body>
-
     <div class="bg-gif"></div>
     <div class="bg-overlay"></div>
-
     <header>
         <div class="nav-container">
             <nav>
@@ -199,23 +245,31 @@
             <div id="blue-line" class="bottom-line"></div>
         </div>
     </header>
-
     <main>
-        <h1 id="page-title" class="main-logo">MALWARE</h1>
-        <p id="page-text" class="main-quote">
-            Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
-        </p>
-        <div id="page-buttons" class="btn-container">
-            <a id="btn-left" href="#" class="btn btn-blue-filled">Get Started</a>
-            <a id="btn-right" href="#" class="btn btn-blue-border">View More</a>
+        <div class="content-left">
+            <h1 id="page-title" class="main-logo">MALWARE</h1>
+            <p id="page-text" class="main-quote">
+                Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
+            </p>
+            <div id="page-buttons" class="btn-container">
+                <a id="btn-left" href="#" class="btn btn-blue-filled">Get Started</a>
+                <a id="btn-right" href="#" class="btn btn-blue-border">View More</a>
+            </div>
+        </div>
+        <div id="page-cards" class="cards-container">
+            <div class="game-card">
+                <img src="https://imgur.com" alt="Minecraft 1.16.5">
+                <div class="version-tag">1.16.5</div>
+            </div>
+            <div class="game-card">
+                <img src="https://imgur.com" alt="Minecraft 1.21.4">
+                <div class="version-tag">1.21.4</div>
+            </div>
         </div>
     </main>
-
     <footer>
         &copy; 2026 Malware Project. All rights reserved.
     </footer>
-
-    <!-- СЮДА СЕЙЧАС ДВСТАВИМ ВТОРУЮ ЧАСТЬ -->
     <script>
         function showPage(pageName) {
             document.getElementById('nav-home').classList.remove('active-link');
@@ -226,14 +280,17 @@
             const title = document.getElementById('page-title');
             const text = document.getElementById('page-text');
             const buttons = document.getElementById('page-buttons');
+            const cards = document.getElementById('page-cards');
             const btnLeft = document.getElementById('btn-left');
             const btnRight = document.getElementById('btn-right');
             const line = document.getElementById('blue-line');
 
             buttons.style.opacity = "1";
             buttons.style.pointerEvents = "auto";
+            cards.style.display = "flex";
             btnLeft.className = "btn";
             btnRight.className = "btn";
+            btnRight.style.display = "inline-block";
 
             if (pageName === 'home') {
                 document.getElementById('nav-home').classList.add('active-link');
@@ -268,6 +325,7 @@
                 text.innerText = "Приветствуем на сайте чита Malwar! Дальше здесь будет рассказываться, как им пользоваться, как настраивать функции под легитную или жесткую игру и как проходить любые проверки администрации.";
                 buttons.style.opacity = "0";
                 buttons.style.pointerEvents = "none";
+                cards.style.display = "none"; 
             }
             else if (pageName === 'discord') {
                 document.getElementById('nav-discord').classList.add('active-link');
@@ -277,12 +335,10 @@
                 text.innerText = "Присоединяйся к нашему официальному сообществу! Здесь ты сможешь найти актуальные кастомные конфиги, пообщаться с другими игроками и первыми узнавать о выходе новых обновлений.";
                 btnLeft.classList.add('btn-blue-filled');
                 btnLeft.innerText = "ВОЙТИ В ДИСКОРД";
-                // Сюда можно вписать ссылку на твой сервер вместо '#'
                 btnLeft.setAttribute('href', 'https://discord.gg'); 
                 btnLeft.setAttribute('target', '_blank');
-                buttons.style.opacity = "1";
-                buttons.style.pointerEvents = "auto";
                 btnRight.style.display = "none"; 
+                cards.style.display = "none"; 
             }
         }
     </script>
