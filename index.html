@@ -27,14 +27,14 @@
             position: relative;
         }
 
-        /* 100% рабочая гифка с игрового сервера Imgur */
+        /* 100% рабочая гифка с серверов Discord (не блокируется сайтами) */
         .bg-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://imgur.com');
+            background-image: url('https://discordapp.com&');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -52,14 +52,14 @@
             z-index: -1;
         }
 
-        /* Верхняя шапка сайта (Поиск убран полностью) */
+        /* Верхняя шапка сайта */
         header {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 32px 40px 0 40px;
             display: flex;
-            justify-content: flex-start; /* Меню прижато к левому краю */
+            justify-content: flex-start;
             align-items: center;
             z-index: 10;
         }
@@ -69,7 +69,7 @@
         }
         nav {
             display: flex;
-            gap: 40px; /* Сделали расстояние между кнопками чуть шире */
+            gap: 40px;
         }
         nav a {
             color: #ffffff !important;
@@ -83,16 +83,14 @@
         nav a:hover {
             opacity: 0.7;
         }
-        /* Синий цвет для активной вкладки HOME */
         .active-link {
             color: #3b82f6 !important;
         }
-        /* Тонкая синяя линия строго под вкладкой HOME */
         .bottom-line {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px; /* Точная ширина под слово HOME */
+            width: 60px;
             border-bottom: 2px solid #3b82f6;
         }
 
