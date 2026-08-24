@@ -142,6 +142,7 @@
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.2s;
+            cursor: pointer;
         }
         .btn-blue-filled {
             background: #1e3a8a;
@@ -215,11 +216,15 @@
             color: #3b82f6;
             border: 1px solid rgba(59, 130, 246, 0.4);
         }
+        /* Стильный информативный подвал */
         footer {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 40px 32px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 10px;
             font-weight: 500;
             letter-spacing: 1px;
@@ -228,6 +233,14 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 10;
             padding-top: 16px;
+        }
+        .beta-tag {
+            color: #ef4444; /* Сочный красный цвет для плашки BETA */
+            font-weight: 700;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(239, 68, 68, 0.05);
         }
     </style>
 </head>
@@ -252,11 +265,10 @@
                 Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
             </p>
             <div id="page-buttons" class="btn-container">
-                <a id="btn-left" href="#" class="btn btn-blue-filled">Get Started</a>
-                <a id="btn-right" href="#" class="btn btn-blue-border">View More</a>
+                <a id="btn-left" class="btn btn-blue-filled">Get Started</a>
+                <a id="btn-right" class="btn btn-blue-border">View More</a>
             </div>
         </div>
-        <!-- Теперь код ищет кодированное имя файла фон.webp -->
         <div id="page-cards" class="cards-container">
             <div class="game-card">
                 <img src="%D1%84%D0%BE%D0%BD.webp" alt="Minecraft 1.16.5">
@@ -269,7 +281,8 @@
         </div>
     </main>
     <footer>
-        &copy; 2026 Malware Project. All rights reserved.
+        <div>&copy; 2026 Malware Project. All rights reserved.</div>
+        <div class="beta-tag">BETA TEST — НАСТОЯЩИЙ МОМЕНТ ЭТО ПРОСТО ПУСТЫШКА (МАКЕТ)</div>
     </footer>
     <script>
         function showPage(pageName) {
@@ -298,11 +311,15 @@
                 line.style.width = '60px';
                 title.innerText = "MALWARE";
                 text.innerText = "Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.";
+                
                 btnLeft.classList.add('btn-blue-filled');
                 btnLeft.innerText = "Get Started";
+                // Перенаправление Get Started на страницу Install
+                btnLeft.onclick = function() { showPage('install'); };
+                
                 btnRight.classList.add('btn-blue-border');
                 btnRight.innerText = "View More";
-                btnLeft.onclick = null;
+                btnRight.onclick = function() { showPage('help'); };
                 cards.style.display = "none"; 
             } 
             else if (pageName === 'install') {
@@ -311,9 +328,11 @@
                 line.style.width = '75px';
                 title.innerText = "INSTALLATION";
                 text.innerText = "Скачайте актуальную версию Malware Client. Перед запуском лаунчера обязательно ознакомьтесь с инструкцией по установке и настройке обхода проверок.";
+                
                 btnLeft.classList.add('btn-blue-filled');
                 btnLeft.innerText = "ИНСТРУКЦИЯ";
                 btnLeft.onclick = function() { showPage('help'); };
+                
                 btnRight.classList.add('btn-green');
                 btnRight.innerText = "INSTALL";
                 btnRight.onclick = null;
@@ -335,14 +354,19 @@
                 line.style.width = '75px';
                 title.innerText = "DISCORD SERVER";
                 text.innerText = "Присоединяйся к нашему официальному сообществу! Здесь ты сможешь найти актуальные кастомные конфиги, пообщаться с другими игроками и первыми узнавать о выходе новых обновлений.";
+                
                 btnLeft.classList.add('btn-blue-filled');
                 btnLeft.innerText = "ВОЙТИ В ДИСКОРД";
                 btnLeft.setAttribute('href', 'https://discord.gg'); 
                 btnLeft.setAttribute('target', '_blank');
+                
                 btnRight.style.display = "none"; 
                 cards.style.display = "none"; 
             }
         }
+        
+        // Запуск при первой загрузке страницы, чтобы активировать клик по Get Started
+        showPage('home');
     </script>
 </body>
 </html>
