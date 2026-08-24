@@ -171,8 +171,9 @@
             background: #22c55e !important;
             box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
         }
+        /* Карточки изначально скрыты (display: none), на HOME их не будет */
         .cards-container {
-            display: flex;
+            display: none;
             gap: 24px;
             transition: opacity 0.3s ease;
         }
@@ -256,13 +257,14 @@
                 <a id="btn-right" href="#" class="btn btn-blue-border">View More</a>
             </div>
         </div>
+        <!-- Картинки теперь загружаются прямо из твоего репозитория GitHub Pages -->
         <div id="page-cards" class="cards-container">
             <div class="game-card">
-                <img src="https://imgur.com" alt="Minecraft 1.16.5">
+                <img src="screen.png" alt="Minecraft 1.16.5">
                 <div class="version-tag">1.16.5</div>
             </div>
             <div class="game-card">
-                <img src="https://imgur.com" alt="Minecraft 1.21.4">
+                <img src="screen.png" alt="Minecraft 1.21.4">
                 <div class="version-tag">1.21.4</div>
             </div>
         </div>
@@ -287,7 +289,6 @@
 
             buttons.style.opacity = "1";
             buttons.style.pointerEvents = "auto";
-            cards.style.display = "flex";
             btnLeft.className = "btn";
             btnRight.className = "btn";
             btnRight.style.display = "inline-block";
@@ -303,6 +304,7 @@
                 btnRight.classList.add('btn-blue-border');
                 btnRight.innerText = "View More";
                 btnLeft.onclick = null;
+                cards.style.display = "none"; /* Карточки полностью скрыты на HOME */
             } 
             else if (pageName === 'install') {
                 document.getElementById('nav-install').classList.add('active-link');
@@ -316,6 +318,7 @@
                 btnRight.classList.add('btn-green');
                 btnRight.innerText = "INSTALL";
                 btnRight.onclick = null;
+                cards.style.display = "flex"; /* Карточки появляются ТОЛЬКО ТУТ */
             }
             else if (pageName === 'help') {
                 document.getElementById('nav-help').classList.add('active-link');
