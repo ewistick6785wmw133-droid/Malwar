@@ -52,14 +52,14 @@
             z-index: -1;
         }
 
-        /* Верхняя шапка сайта */
+        /* Верхняя шапка сайта (Поиск убран полностью) */
         header {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 32px 40px 0 40px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Меню прижато к левому краю */
             align-items: center;
             z-index: 10;
         }
@@ -69,7 +69,7 @@
         }
         nav {
             display: flex;
-            gap: 32px;
+            gap: 40px; /* Сделали расстояние между кнопками чуть шире */
         }
         nav a {
             color: #ffffff !important;
@@ -83,32 +83,17 @@
         nav a:hover {
             opacity: 0.7;
         }
+        /* Синий цвет для активной вкладки HOME */
         .active-link {
             color: #3b82f6 !important;
         }
+        /* Тонкая синяя линия строго под вкладкой HOME */
         .bottom-line {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 110px;
+            width: 60px; /* Точная ширина под слово HOME */
             border-bottom: 2px solid #3b82f6;
-        }
-        .search-box input {
-            background: transparent;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            border-radius: 4px;
-            padding: 6px 16px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #bfdbfe;
-            text-transform: uppercase;
-            outline: none;
-            width: 200px;
-            transition: border-color 0.2s;
-        }
-        .search-box input:focus {
-            border-color: #3b82f6;
         }
 
         /* Главный контент СТРОГО ПО СЕРЕДИНЕ СЛЕВА */
@@ -125,7 +110,7 @@
             z-index: 10;
         }
 
-        /* Название синее, жирное, кастомный шрифт */
+        /* Название синее, жирное */
         .main-logo {
             font-size: 72px;
             font-weight: 900; 
@@ -137,7 +122,7 @@
             text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
         }
 
-        /* Описание темно-серое под названием */
+        /* Описание под названием */
         .main-quote {
             margin-top: 24px;
             font-size: 15px;
@@ -211,16 +196,12 @@
     <header>
         <div class="nav-container">
             <nav>
-                <a href="#">Home</a>
-                <a href="#">Product</a>
-                <a href="#" class="active-link">Pricing</a>
+                <a href="#" class="active-link">Home</a>
+                <a href="#">Install</a>
+                <a href="#">Discord</a>
                 <a href="#">Help</a>
-                <a href="#">Blog</a>
             </nav>
             <div class="bottom-line"></div>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search">
         </div>
     </header>
 
