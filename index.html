@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malware Client</title>
+    <!-- Подключаем топовый шрифт Montserrat из Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        /* Базовые настройки экрана без прокрутки */
+        /* Базовые настройки экрана */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,7 +19,8 @@
         body {
             height: 100vh;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Применяем новый шрифт */
+            font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -22,28 +28,28 @@
             position: relative;
         }
 
-        /* Полноэкранный GIF фон */
+        /* Полноэкранный GIF фон, который мы загрузили в репозиторий */
         .bg-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://simple-animation.ru');
+            background-image: url('bg.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             z-index: -2;
         }
 
-        /* Затемнение поверх гифки */
+        /* Затемнение поверх гифки для читаемости */
         .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 18, 0.75);
+            background: rgba(8, 8, 14, 0.75);
             z-index: -1;
         }
 
@@ -69,7 +75,7 @@
         nav a {
             color: #ffffff !important;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -85,7 +91,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 120px;
+            width: 110px;
             border-bottom: 2px solid #3b82f6;
         }
         .search-box input {
@@ -93,7 +99,7 @@
             border: 1px solid rgba(59, 130, 246, 0.4);
             border-radius: 4px;
             padding: 6px 16px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             letter-spacing: 1px;
             color: #bfdbfe;
@@ -114,37 +120,36 @@
             padding: 0 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Центрирование по вертикали */
-            align-items: flex-start; /* Прижать к левому краю */
+            justify-content: center; 
+            align-items: flex-start; 
             flex-grow: 1;
             z-index: 10;
         }
 
-        /* Название синее и чуть прозрачное */
+        /* Название: Синее, жирное, кастомный шрифт */
         .main-logo {
-            font-size: 64px;
-            font-weight: 900;
-            letter-spacing: 4px;
+            font-size: 72px;
+            font-weight: 900; /* Максимальная жирность */
+            letter-spacing: 6px;
             color: #2563eb;
             opacity: 0.75;
             text-transform: uppercase;
             line-height: 1;
-            text-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+            text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
         }
 
-        /* Описание темно-серое, чуть прозрачное, но читаемое */
+        /* Описание под названием */
         .main-quote {
-            margin-top: 20px;
-            font-size: 16px;
+            margin-top: 24px;
+            font-size: 15px;
             font-weight: 500;
-            color: #64748b;
-            opacity: 0.85;
+            color: #94a3b8; /* Чуть светлее, чтобы было видно */
             max-width: 550px;
-            line-height: 1.6;
-            text-shadow: 1px 1px 2px #000000;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* Синие кнопки */
+        /* Кнопки */
         .btn-container {
             margin-top: 40px;
             display: flex;
@@ -152,7 +157,7 @@
         }
         .btn {
             display: inline-block;
-            padding: 12px 32px;
+            padding: 14px 36px;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
@@ -162,13 +167,14 @@
             transition: all 0.2s;
         }
         .btn-filled {
-            background: rgba(30, 58, 138, 0.9);
-            color: #bfdbfe;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.8);
+            background: #1e3a8a;
+            color: #ffffff;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         .btn-filled:hover {
-            background: #1e3a8a;
+            background: #2563eb;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
         }
         .btn-border {
             background: transparent;
@@ -176,7 +182,7 @@
             border: 1px solid rgba(59, 130, 246, 0.6);
         }
         .btn-border:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.15);
         }
 
         /* Подвал */
@@ -185,7 +191,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 40px 32px 40px;
-            font-size: 11px;
+            font-size: 10px;
+            font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #475569;
@@ -197,7 +204,7 @@
 </head>
 <body>
 
-    <!-- Компоненты заднего фона -->
+    <!-- Задний фон -->
     <div class="bg-gif"></div>
     <div class="bg-overlay"></div>
 
@@ -218,7 +225,7 @@
         </div>
     </header>
 
-    <!-- Главный блок (по центру слева) -->
+    <!-- Главный блок -->
     <main>
         <h1 class="main-logo">MALWARE</h1>
         <p class="main-quote">
@@ -230,7 +237,7 @@
         </div>
     </main>
 
-    <!-- Подвал сайта -->
+    <!-- Подвал -->
     <footer>
         &copy; 2026 Malware Project. All rights reserved.
     </footer>
