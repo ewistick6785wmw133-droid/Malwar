@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malware Client</title>
-    <!-- Подключаем топовый шрифт Montserrat из Google Fonts -->
+    <!-- Топовый шрифт Montserrat -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -19,7 +19,6 @@
         body {
             height: 100vh;
             overflow: hidden;
-            /* Применяем новый шрифт */
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             display: flex;
@@ -28,7 +27,7 @@
             position: relative;
         }
 
-        /* Альтернативный импорт гифки со стабильного сервера */
+        /* 100% рабочая гифка с игрового сервера Imgur */
         .bg-gif {
             position: fixed;
             top: 0;
@@ -42,9 +41,7 @@
             z-index: -2;
         }
 
-        }
-
-        /* Затемнение поверх гифки для читаемости */
+        /* Затемнение поверх гифки для идеальной читаемости */
         .bg-overlay {
             position: fixed;
             top: 0;
@@ -128,10 +125,10 @@
             z-index: 10;
         }
 
-        /* Название: Синее, жирное, кастомный шрифт */
+        /* Название синее, жирное, кастомный шрифт */
         .main-logo {
             font-size: 72px;
-            font-weight: 900; /* Максимальная жирность */
+            font-weight: 900; 
             letter-spacing: 6px;
             color: #2563eb;
             opacity: 0.75;
@@ -140,18 +137,18 @@
             text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
         }
 
-        /* Описание под названием */
+        /* Описание темно-серое под названием */
         .main-quote {
             margin-top: 24px;
             font-size: 15px;
             font-weight: 500;
-            color: #94a3b8; /* Чуть светлее, чтобы было видно */
+            color: #94a3b8; 
             max-width: 550px;
             line-height: 1.7;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* Кнопки */
+        /* Синие кнопки */
         .btn-container {
             margin-top: 40px;
             display: flex;
