@@ -24,17 +24,17 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            background-color: #0b0b12; /* Запасной красивый цвет */
+            background-color: #0b0b12;
         }
 
-        /* Обход кэша через ?v=1 — заставит браузер обновить гифку */
+        /* Прямая ссылка на файл внутри твоего гитхаба */
         .bg-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('bg.gif?v=1');
+            background-image: url('bg.gif?v=2');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -72,27 +72,30 @@
             gap: 40px;
         }
         nav a {
-            color: #ffffff !important; /* Меню строго белое */
+            color: #ffffff !important;
             text-decoration: none;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: opacity 0.2s;
+            cursor: pointer;
         }
         nav a:hover {
             opacity: 0.7;
         }
-        /* Синий цвет только для Home */
+        /* Синий цвет для активной ссылки */
         .active-link {
             color: #3b82f6 !important;
         }
+        /* Тонкая синяя линия, которая будет двигаться под кнопками */
         .bottom-line {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 60px;
             border-bottom: 2px solid #3b82f6;
+            transition: all 0.3s ease;
         }
 
         /* Главный контент по середине слева */
@@ -109,7 +112,7 @@
             z-index: 10;
         }
 
-        /* Название MALWARE синее и чуть невидимое */
+        /* Название / Заголовок */
         .main-logo {
             font-size: 72px;
             font-weight: 900; 
@@ -119,9 +122,10 @@
             text-transform: uppercase;
             line-height: 1;
             text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+            transition: all 0.2s ease;
         }
 
-        /* Описание темно-серое */
+        /* Описание */
         .main-quote {
             margin-top: 24px;
             font-size: 15px;
@@ -131,6 +135,7 @@
             max-width: 550px;
             line-height: 1.7;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            transition: all 0.2s ease;
         }
 
         /* Кнопки */
@@ -138,6 +143,7 @@
             margin-top: 40px;
             display: flex;
             gap: 16px;
+            transition: opacity 0.2s ease;
         }
         .btn {
             display: inline-block;
@@ -190,24 +196,27 @@
     <div class="bg-gif"></div>
     <div class="bg-overlay"></div>
 
+    <!-- Шапка сайта -->
     <header>
         <div class="nav-container">
             <nav>
-                <a href="#" class="active-link">Home</a>
-                <a href="#">Install</a>
-                <a href="#">Discord</a>
-                <a href="#">Help</a>
+                <a id="nav-home" class="active-link" onclick="showPage('home')">Home</a>
+                <a id="nav-install" onclick="showPage('install')">Install</a>
+                <a id="nav-discord" onclick="showPage('discord')">Discord</a>
+                <a id="nav-help" onclick="showPage('help')">Help</a>
             </nav>
-            <div class="bottom-line"></div>
+            <div id="blue-line" class="bottom-line"></div>
         </div>
     </header>
 
+    <!-- Главный блок -->
     <main>
-        <h1 class="main-logo">MALWARE</h1>
-        <p class="main-quote">
+        <!-- Сюда скрипт будет подставлять нужный текст -->
+        <h1 id="page-title" class="main-logo">MALWARE</h1>
+        <p id="page-text" class="main-quote">
             Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
         </p>
-        <div class="btn-container">
+        <div id="page-buttons" class="btn-container">
             <a href="#" class="btn btn-filled">Get Started</a>
             <a href="#" class="btn btn-border">View More</a>
         </div>
@@ -216,6 +225,47 @@
     <footer>
         &copy; 2026 Malware Project. All rights reserved.
     </footer>
+
+    <!-- Умный скрипт переключения контента -->
+    <script>
+        function showPage(pageName) {
+            // Убираем активный класс со всех ссылок меню
+            document.getElementById('nav-home').classList.remove('active-link');
+            document.getElementById('nav-install').classList.remove('active-link');
+            document.getElementById('nav-discord').classList.remove('active-link');
+            document.getElementById('nav-help').classList.remove('active-link');
+
+            // Элементы контента
+            const title = document.getElementById('page-title');
+            const text = document.getElementById('page-text');
+            const buttons = document.getElementById('page-buttons');
+            const line = document.getElementById('blue-line');
+
+            // Логика переключения
+            if (pageName === 'home') {
+                document.getElementById('nav-home').classList.add('active-link');
+                line.style.left = '0px';
+                line.style.width = '60px';
+                
+                title.innerText = "MALWARE";
+                text.innerText = "Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.";
+                buttons.style.opacity = "1";
+                buttons.style.pointerEvents = "auto";
+            } 
+            else if (pageName === 'help') {
+                document.getElementById('nav-help').classList.add('active-link');
+                // Сдвигаем синюю полоску под слово HELP
+                line.style.left = '290px'; 
+                line.style.width = '50px';
+
+                title.innerText = "HOW TO PLAY";
+                text.innerText = "Приветствуем на сайте чита Malwar! Дальше здесь будет рассказываться, как им пользоваться, как настраивать функции под легитную или жесткую игру и как проходить любые проверки администрации.";
+                // Прячем кнопки, так как на странице гайда они не нужны
+                buttons.style.opacity = "0";
+                buttons.style.pointerEvents = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
