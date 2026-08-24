@@ -24,16 +24,17 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
+            background-color: #0b0b12; /* Запасной красивый цвет */
         }
 
-        /* Прямая вечная ссылка на файл внутри твоего гитхаба */
+        /* Обход кэша через ?v=1 — заставит браузер обновить гифку */
         .bg-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('bg.gif');
+            background-image: url('bg.gif?v=1');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
