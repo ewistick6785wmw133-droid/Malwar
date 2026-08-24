@@ -3,36 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malwar Launcher</title>
+    <title>Malwar Client</title>
+    <!-- Подключаем Tailwind CSS -->
     <script src="https://jsdelivr.net"></script>
     <style>
-        body { background-color: #0b0f19; color: #f8fafc; font-family: sans-serif; }
+        /* Точный анимированный градиент и абстрактные волны из референса */
+        body { 
+            background: linear-gradient(135deg, #000000 0%, #150527 40%, #4c1d95 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Сетка и неоновые линии для воссоздания абстрактного фона */
+        .wave-bg {
+            position: absolute;
+            top: 20%;
+            right: -10%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 60%);
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen items-center justify-center p-4">
+<body class="min-h-screen flex flex-col justify-between text-white font-sans antialiased">
 
-    <!-- Главный блок -->
-    <main class="text-center max-w-xl bg-slate-900/80 p-8 rounded-2xl border border-red-500/30 shadow-2xl shadow-red-500/10 backdrop-blur-sm">
+    <!-- Абстрактный задний фон -->
+    <div class="wave-bg"></div>
+
+    <!-- Шапка сайта (Точно как на твоем скрине) -->
+    <header class="w-full max-w-7xl mx-auto px-8 pt-8 flex flex-col md:flex-row justify-between items-center z-10 gap-4">
         
-        <!-- Название проекта -->
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent mb-4 uppercase">
-            Malwar
+        <!-- Ссылки меню слева с тонким подчеркиванием -->
+        <div class="relative pb-2">
+            <nav class="flex space-x-8 text-xs font-bold tracking-widest uppercase text-slate-300">
+                <a href="#" class="hover:text-white transition duration-200">Home</a>
+                <a href="#" class="hover:text-white transition duration-200">Product</a>
+                <a href="#" class="hover:text-white transition duration-200">Pricing</a>
+                <a href="#" class="hover:text-white transition duration-200">Help</a>
+                <a href="#" class="hover:text-white transition duration-200">Blog</a>
+            </nav>
+            <!-- Тонкая белая линия под активным разделом -->
+            <div class="absolute bottom-0 left-0 w-32 border-b border-white"></div>
+        </div>
+
+        <!-- Поисковая строка справа -->
+        <div class="relative w-full md:w-64">
+            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input type="text" placeholder="SEARCH" class="w-full bg-transparent border border-white/40 rounded px-9 py-1.5 text-xs font-bold tracking-wider uppercase placeholder-slate-400 focus:outline-none focus:border-white transition">
+        </div>
+    </header>
+
+    <!-- Главный контент слева -->
+    <main class="w-full max-w-7xl mx-auto px-8 py-20 flex flex-col justify-center items-start z-10 flex-grow">
+        
+        <!-- Заголовок -->
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide uppercase text-white leading-tight">
+            MALWAR <br>
+            <span class="font-bold">NEXT-GEN LAUNCHER</span>
         </h1>
         
-        <!-- Описание -->
-        <p class="text-slate-400 text-base md:text-lg mb-8 leading-relaxed">
-            Приватный софт нового поколения, созданный специально для ReallyWorld. Забудь о постоянных проверках, банах и лагах.
+        <!-- Мелкое описание -->
+        <p class="mt-2 text-slate-400 text-xs tracking-wider font-medium">
+            Landing Page Template / Built for ReallyWorld
         </p>
 
-        <!-- Кнопка Скачать -->
-        <a href="#" class="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all duration-200">
-            Скачать Лаунчер
-        </a>
-
+        <!-- Кнопки в точном стиле референса -->
+        <div class="mt-12 flex flex-wrap gap-4">
+            <!-- Залитая кнопка -->
+            <a href="#" class="px-8 py-3 bg-[#110c1f] hover:bg-[#1a1330] text-white text-xs font-bold tracking-widest uppercase rounded-full border border-white/10 shadow-lg shadow-purple-950/50 transition duration-200">
+                Get Started
+            </a>
+            <!-- Прозрачная кнопка -->
+            <a href="#" class="px-8 py-3 bg-transparent hover:bg-white/5 text-white text-xs font-bold tracking-widest uppercase rounded-full border border-white transition duration-200">
+                View More
+            </a>
+        </div>
     </main>
 
-    <!-- Подвал -->
-    <footer class="mt-8 text-slate-600 text-sm">
+    <!-- Иконки меню справа и снизу (Декоративные элементы со скрина) -->
+    <div class="absolute top-8 right-8 hidden lg:flex flex-col gap-1 opacity-60">
+        <div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div><div class="w-6 h-0.5 bg-white"></div>
+    </div>
+    
+    <div class="absolute bottom-12 right-12 hidden lg:grid grid-cols-2 gap-2 opacity-60">
+        <div class="w-2 h-2 bg-white rounded-full"></div><div class="w-2 h-2 bg-white rounded-full"></div>
+        <div class="w-2 h-2 bg-white rounded-full"></div><div class="w-2 h-2 bg-white rounded-full"></div>
+    </div>
+
+    <!-- Минималистичный подвал -->
+    <footer class="w-full max-w-7xl mx-auto px-8 py-6 z-10 text-slate-600 text-xs tracking-widest uppercase border-t border-white/5">
         &copy; 2026 Malwar Project. All rights reserved.
     </footer>
 
