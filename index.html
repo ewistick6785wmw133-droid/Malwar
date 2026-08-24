@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malware Client</title>
-    <!-- Топовый шрифт Montserrat -->
+    <!-- Шрифт Montserrat -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -26,8 +26,6 @@
             position: relative;
             background-color: #0b0b12;
         }
-
-        /* Прямая ссылка на файл внутри твоего гитхаба */
         .bg-gif {
             position: fixed;
             top: 0;
@@ -40,8 +38,6 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-
-        /* Затемнение поверх гифки */
         .bg-overlay {
             position: fixed;
             top: 0;
@@ -51,8 +47,6 @@
             background: rgba(8, 8, 14, 0.75);
             z-index: -1;
         }
-
-        /* Шапка сайта */
         header {
             width: 100%;
             max-width: 1200px;
@@ -84,11 +78,9 @@
         nav a:hover {
             opacity: 0.7;
         }
-        /* Синий цвет для активной ссылки */
         .active-link {
             color: #3b82f6 !important;
         }
-        /* Тонкая синяя линия, которая будет двигаться под кнопками */
         .bottom-line {
             position: absolute;
             bottom: 0;
@@ -97,8 +89,6 @@
             border-bottom: 2px solid #3b82f6;
             transition: all 0.3s ease;
         }
-
-        /* Главный контент по середине слева */
         main {
             width: 100%;
             max-width: 1200px;
@@ -111,8 +101,6 @@
             flex-grow: 1;
             z-index: 10;
         }
-
-        /* Название / Заголовок */
         .main-logo {
             font-size: 72px;
             font-weight: 900; 
@@ -124,8 +112,6 @@
             text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
             transition: all 0.2s ease;
         }
-
-        /* Описание */
         .main-quote {
             margin-top: 24px;
             font-size: 15px;
@@ -137,13 +123,10 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
             transition: all 0.2s ease;
         }
-
-        /* Кнопки */
         .btn-container {
             margin-top: 40px;
             display: flex;
             gap: 16px;
-            transition: opacity 0.2s ease;
         }
         .btn {
             display: inline-block;
@@ -156,25 +139,34 @@
             border-radius: 50px;
             transition: all 0.2s;
         }
-        .btn-filled {
+        .btn-blue-filled {
             background: #1e3a8a;
             color: #ffffff;
             border: 1px solid rgba(59, 130, 246, 0.5);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
-        .btn-filled:hover {
+        .btn-blue-filled:hover {
             background: #2563eb;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
         }
-        .btn-border {
+        .btn-blue-border {
             background: transparent;
             color: #3b82f6;
             border: 1px solid rgba(59, 130, 246, 0.6);
         }
-        .btn-border:hover {
+        .btn-blue-border:hover {
             background: rgba(59, 130, 246, 0.15);
         }
-
+        .btn-green {
+            background: #15803d !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(34, 197, 94, 0.5) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        .btn-green:hover {
+            background: #22c55e !important;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+        }
         footer {
             width: 100%;
             max-width: 1200px;
@@ -196,7 +188,6 @@
     <div class="bg-gif"></div>
     <div class="bg-overlay"></div>
 
-    <!-- Шапка сайта -->
     <header>
         <div class="nav-container">
             <nav>
@@ -209,16 +200,14 @@
         </div>
     </header>
 
-    <!-- Главный блок -->
     <main>
-        <!-- Сюда скрипт будет подставлять нужный текст -->
         <h1 id="page-title" class="main-logo">MALWARE</h1>
         <p id="page-text" class="main-quote">
             Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
         </p>
         <div id="page-buttons" class="btn-container">
-            <a href="#" class="btn btn-filled">Get Started</a>
-            <a href="#" class="btn btn-border">View More</a>
+            <a id="btn-left" href="#" class="btn btn-blue-filled">Get Started</a>
+            <a id="btn-right" href="#" class="btn btn-blue-border">View More</a>
         </div>
     </main>
 
@@ -226,46 +215,76 @@
         &copy; 2026 Malware Project. All rights reserved.
     </footer>
 
-    <!-- Умный скрипт переключения контента -->
+    <!-- СЮДА СЕЙЧАС ДВСТАВИМ ВТОРУЮ ЧАСТЬ -->
     <script>
         function showPage(pageName) {
-            // Убираем активный класс со всех ссылок меню
             document.getElementById('nav-home').classList.remove('active-link');
             document.getElementById('nav-install').classList.remove('active-link');
             document.getElementById('nav-discord').classList.remove('active-link');
             document.getElementById('nav-help').classList.remove('active-link');
 
-            // Элементы контента
             const title = document.getElementById('page-title');
             const text = document.getElementById('page-text');
             const buttons = document.getElementById('page-buttons');
+            const btnLeft = document.getElementById('btn-left');
+            const btnRight = document.getElementById('btn-right');
             const line = document.getElementById('blue-line');
 
-            // Логика переключения
+            buttons.style.opacity = "1";
+            buttons.style.pointerEvents = "auto";
+            btnLeft.className = "btn";
+            btnRight.className = "btn";
+
             if (pageName === 'home') {
                 document.getElementById('nav-home').classList.add('active-link');
                 line.style.left = '0px';
                 line.style.width = '60px';
-                
                 title.innerText = "MALWARE";
                 text.innerText = "Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.";
-                buttons.style.opacity = "1";
-                buttons.style.pointerEvents = "auto";
+                btnLeft.classList.add('btn-blue-filled');
+                btnLeft.innerText = "Get Started";
+                btnRight.classList.add('btn-blue-border');
+                btnRight.innerText = "View More";
+                btnLeft.onclick = null;
             } 
+            else if (pageName === 'install') {
+                document.getElementById('nav-install').classList.add('active-link');
+                line.style.left = '100px';
+                line.style.width = '75px';
+                title.innerText = "INSTALLATION";
+                text.innerText = "Скачайте актуальную версию Malware Client. Перед запуском лаунчера обязательно ознакомьтесь с инструкцией по установке и настройке обхода проверок.";
+                btnLeft.classList.add('btn-blue-filled');
+                btnLeft.innerText = "ИНСТРУКЦИЯ";
+                btnLeft.onclick = function() { showPage('help'); };
+                btnRight.classList.add('btn-green');
+                btnRight.innerText = "INSTALL";
+                btnRight.onclick = null;
+            }
             else if (pageName === 'help') {
                 document.getElementById('nav-help').classList.add('active-link');
-                // Сдвигаем синюю полоску под слово HELP
-                line.style.left = '290px'; 
+                line.style.left = '315px'; 
                 line.style.width = '50px';
-
                 title.innerText = "HOW TO PLAY";
                 text.innerText = "Приветствуем на сайте чита Malwar! Дальше здесь будет рассказываться, как им пользоваться, как настраивать функции под легитную или жесткую игру и как проходить любые проверки администрации.";
-                // Прячем кнопки, так как на странице гайда они не нужны
                 buttons.style.opacity = "0";
                 buttons.style.pointerEvents = "none";
             }
+            else if (pageName === 'discord') {
+                document.getElementById('nav-discord').classList.add('active-link');
+                line.style.left = '215px';
+                line.style.width = '75px';
+                title.innerText = "DISCORD SERVER";
+                text.innerText = "Присоединяйся к нашему официальному сообществу! Здесь ты сможешь найти актуальные кастомные конфиги, пообщаться с другими игроками и первыми узнавать о выходе новых обновлений.";
+                btnLeft.classList.add('btn-blue-filled');
+                btnLeft.innerText = "ВОЙТИ В ДИСКОРД";
+                // Сюда можно вписать ссылку на твой сервер вместо '#'
+                btnLeft.setAttribute('href', 'https://discord.gg'); 
+                btnLeft.setAttribute('target', '_blank');
+                buttons.style.opacity = "1";
+                buttons.style.pointerEvents = "auto";
+                btnRight.style.display = "none"; 
+            }
         }
     </script>
-
 </body>
 </html>
