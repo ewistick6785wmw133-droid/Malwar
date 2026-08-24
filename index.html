@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malware Client</title>
-    <!-- Подключаем Tailwind CSS -->
-    <script src="https://jsdelivr.net"></script>
     <style>
-        /* Полноэкранный фон без потери качества */
+        /* Базовые настройки экрана без прокрутки */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Полноэкранный GIF фон */
         .bg-gif {
             position: fixed;
             top: 0;
@@ -20,95 +35,203 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-        /* Тёмный полупрозрачный слой поверх гифки */
+
+        /* Затемнение поверх гифки */
         .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(8, 8, 14, 0.75);
+            background: rgba(10, 10, 18, 0.75);
             z-index: -1;
         }
-        /* Чистые стили для текста, чтобы обойти баги процессора стилей */
-        .menu-link {
+
+        /* Верхняя шапка сайта */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 40px 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .nav-container {
+            position: relative;
+            padding-bottom: 8px;
+        }
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+        nav a {
             color: #ffffff !important;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: opacity 0.2s;
         }
+        nav a:hover {
+            opacity: 0.7;
+        }
+        .active-link {
+            color: #3b82f6 !important;
+        }
+        .bottom-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 120px;
+            border-bottom: 2px solid #3b82f6;
+        }
+        .search-box input {
+            background: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 4px;
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #bfdbfe;
+            text-transform: uppercase;
+            outline: none;
+            width: 200px;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: #3b82f6;
+        }
+
+        /* Главный контент СТРОГО ПО СЕРЕДИНЕ СЛЕВА */
+        main {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Центрирование по вертикали */
+            align-items: flex-start; /* Прижать к левому краю */
+            flex-grow: 1;
+            z-index: 10;
+        }
+
+        /* Название синее и чуть прозрачное */
         .main-logo {
-            color: #2563eb !important; /* Насыщенный синий */
-            opacity: 0.75 !important;   /* Чуть невидимый, как ты просил */
-            text-shadow: 0 0 25px rgba(37, 99, 235, 0.5); /* Синее неоновое свечение */
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #2563eb;
+            opacity: 0.75;
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
+
+        /* Описание темно-серое, чуть прозрачное, но читаемое */
         .main-quote {
-            color: #64748b !important; /* Темно-серый */
-            opacity: 0.85 !important;   /* Слегка прозрачный */
-            text-shadow: 1px 1px 2px #000000; /* Черная тень, чтобы текст БЫЛ ВИДЕН */
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            opacity: 0.85;
+            max-width: 550px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        /* Синие кнопки */
+        .btn-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.2s;
+        }
+        .btn-filled {
+            background: rgba(30, 58, 138, 0.9);
+            color: #bfdbfe;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.8);
+        }
+        .btn-filled:hover {
+            background: #1e3a8a;
+        }
+        .btn-border {
+            background: transparent;
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.6);
+        }
+        .btn-border:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Подвал */
+        footer {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 32px 40px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #475569;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 10;
+            padding-top: 16px;
         }
     </style>
 </head>
-<body class="h-screen overflow-hidden flex flex-col justify-between text-white font-sans antialiased relative">
+<body>
 
-    <!-- Задний фон (Гифка + затемнение) -->
+    <!-- Компоненты заднего фона -->
     <div class="bg-gif"></div>
     <div class="bg-overlay"></div>
 
     <!-- Шапка сайта -->
-    <header class="w-full max-w-7xl mx-auto px-8 pt-8 flex justify-between items-center z-10 gap-4">
-        <div class="relative pb-2">
-            <!-- Надписи сверху теперь жестко БЕЛЫЕ -->
-            <nav class="flex space-x-8 text-xs font-bold tracking-widest uppercase">
-                <a href="#" class="menu-link hover:opacity-80 transition duration-200">Home</a>
-                <a href="#" class="menu-link hover:opacity-80 transition duration-200">Product</a>
-                <a href="#" class="hover:text-blue-400 transition duration-200" style="color: #3b82f6 !important;">Pricing</a>
-                <a href="#" class="menu-link hover:opacity-80 transition duration-200">Help</a>
-                <a href="#" class="menu-link hover:opacity-80 transition duration-200">Blog</a>
+    <header>
+        <div class="nav-container">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Product</a>
+                <a href="#" class="active-link">Pricing</a>
+                <a href="#">Help</a>
+                <a href="#">Blog</a>
             </nav>
-            <!-- Тонкая синяя линия под активным разделом -->
-            <div class="absolute bottom-0 left-0 w-32 border-b border-blue-500"></div>
+            <div class="bottom-line"></div>
         </div>
-
-        <!-- Поисковая строка в синих тонах БЕЗ лупы -->
-        <div class="relative hidden sm:block w-48 md:w-64">
-            <input type="text" placeholder="SEARCH" class="w-full bg-transparent border border-blue-500/40 rounded px-4 py-1.5 text-xs font-bold tracking-wider uppercase placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition text-blue-200">
+        <div class="search-box">
+            <input type="text" placeholder="Search">
         </div>
     </header>
 
-    <!-- Главный контент слева -->
-    <main class="w-full max-w-7xl mx-auto px-8 py-4 flex flex-col justify-center items-start z-10 flex-grow">
-        
-        <!-- Название: СИНЕЕ, ЧУТЬ НЕВИДИМОЕ (в стиле ТЗ) -->
-        <h1 class="main-logo text-5xl md:text-7xl font-black tracking-wider uppercase leading-none">
-            MALWARE
-        </h1>
-        
-        <!-- Цитата: ТЕМНО-СЕРАЯ, СЛЕГКА ПРОЗРАЧНАЯ, НО ОТЛИЧНО ЧИТАЕМАЯ -->
-        <p class="main-quote mt-4 text-sm md:text-base font-medium max-w-xl leading-relaxed">
+    <!-- Главный блок (по центру слева) -->
+    <main>
+        <h1 class="main-logo">MALWARE</h1>
+        <p class="main-quote">
             Устал от постоянных проверок, банов и лагов? Malwar — это приватный софт нового поколения, созданный специально для ReallyWorld.
         </p>
-
-        <!-- Кнопки в синем стиле -->
-        <div class="mt-10 flex flex-wrap gap-4">
-            <a href="#" class="px-8 py-3 bg-blue-950/90 hover:bg-blue-900 text-blue-200 text-xs font-bold tracking-widest uppercase rounded-full border border-blue-500/40 shadow-lg shadow-blue-950/80 transition duration-200">
-                Get Started
-            </a>
-            <a href="#" class="px-8 py-3 bg-transparent hover:bg-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase rounded-full border border-blue-500/60 transition duration-200">
-                View More
-            </a>
+        <div class="btn-container">
+            <a href="#" class="btn btn-filled">Get Started</a>
+            <a href="#" class="btn btn-border">View More</a>
         </div>
     </main>
 
-    <!-- Декоративные элементы справа (в синем цвете) -->
-    <div class="absolute top-8 right-8 hidden lg:flex flex-col gap-1 opacity-20">
-        <div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div><div class="w-6 h-0.5 bg-blue-400"></div>
-    </div>
-    
-    <div class="absolute bottom-12 right-12 hidden lg:grid grid-cols-2 gap-2 opacity-20">
-        <div class="w-2 h-2 bg-blue-400 rounded-full"></div><div class="w-2 h-2 bg-blue-400 rounded-full"></div>
-        <div class="w-2 h-2 bg-blue-400 rounded-full"></div><div class="w-2 h-2 bg-blue-400 rounded-full"></div>
-    </div>
-
     <!-- Подвал сайта -->
-    <footer class="w-full max-w-7xl mx-auto px-8 py-6 z-10 text-slate-600 text-xs tracking-widest uppercase border-t border-white/5">
+    <footer>
         &copy; 2026 Malware Project. All rights reserved.
     </footer>
 
